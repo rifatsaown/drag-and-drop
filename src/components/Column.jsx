@@ -11,34 +11,34 @@ export default function Column({ title, tasks = [] }) {
   const getColumnHeaderStyle = () => {
     switch (title) {
       case 'Qualification':
-        return 'bg-purple-50 border-purple-200';
+        return 'bg-[#F2F4F7]';
       case 'Need Analysis':
-        return 'bg-blue-50 border-blue-200';
+        return 'bg-[#F2F4F7]';
       case 'Proposal':
-        return 'bg-yellow-50 border-yellow-200';
+        return 'bg-[#F2F4F7]';
       case 'Closed Won':
-        return 'bg-green-50 border-green-200';
+        return 'bg-[#F2F4F7]';
       case 'Closed Lost':
-        return 'bg-red-50 border-red-200';
+        return 'bg-[#F2F4F7]';
       default:
-        return 'bg-gray-50 border-gray-200';
+        return 'bg-[#F2F4F7]';
     }
   };
 
   return (
-    <div className="bg-gray-50 rounded-lg shadow p-3 h-full flex flex-col">
+    <div className={`${getColumnHeaderStyle()} rounded-2xl shadow-sm p-4 h-full flex flex-col`}>
       {/* Column Header */}
-      <div className={`p-3 mb-3 rounded-md ${getColumnHeaderStyle()} border`}>
+      <div className={`py-3 mb-4`}>
         <div className="flex justify-between items-center">
-          <h2 className="text-sm font-semibold">{title}</h2>
-          <span className="bg-white text-xs font-medium px-2 py-1 rounded-full">
-            {tasks.length}
+          <h2 className="text-sm font-bold uppercase text-gray-800">{title}</h2>
+          <span className="bg-gray-100 text-xs font-medium px-2 py-0.5 rounded-full text-gray-800">
+            {tasks.length || 0}
           </span>
         </div>
       </div>
 
       {/* Tasks Container */}
-      <div ref={setNodeRef} className="flex-grow overflow-y-auto">
+      <div ref={setNodeRef} className="flex-grow overflow-y-auto space-y-3">
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

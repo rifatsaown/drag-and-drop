@@ -30,22 +30,23 @@ const updateTaskInDatabase = (taskData) => {
 // This structure has columns as keys, and arrays of task objects as values
 const sampleData = {
   // Qualification stage - first step in the sales pipeline
-  Qualification: [
+  QUALIFICATION: [
     {
       id: 'task1',
       title: 'Tazkia Foundation Onboard...',
       status: 'COLD',
-      daysAgo: 30,
+      daysAgo: 20,
       client: 'Nasir Uddin',
       clientAvatar: null,
       dueDate: '2025-02',
       industry: 'webdesign',
+      design: 'Design',
       priority: 'High',
       team: team,
     },
   ],
   // Need Analysis stage - understanding client requirements
-  'Need Analysis': [
+  'NEED ANALYSIS': [
     {
       id: 'task2',
       title: 'Tazkia Foundation Onboard...',
@@ -72,8 +73,8 @@ const sampleData = {
       team: team,
     },
   ],
-  // Proposal stage - offering solutions to clients
-  Proposal: [
+  // Proposal stage
+  PROPOSAL: [
     {
       id: 'task4',
       title: 'Tazkia Foundation Onboard...',
@@ -99,9 +100,22 @@ const sampleData = {
       priority: 'High',
       team: team,
     },
+    {
+      id: 'task8',
+      title: 'Tazkia Foundation Onboard...',
+      status: 'HOT',
+      daysAgo: 20,
+      client: 'Nasir Uddin',
+      clientAvatar: null,
+      projectedValue: 50000,
+      probability: 25,
+      industry: 'Telehealth',
+      priority: 'High',
+      team: team,
+    },
   ],
   // Closed Won stage - successful deals
-  'Closed Won': [
+  'CLOSED WON': [
     {
       id: 'task6',
       title: 'Tazkia Foundation Onboard...',
@@ -116,7 +130,7 @@ const sampleData = {
     },
   ],
   // Closed Lost stage - unsuccessful deals
-  'Closed Lost': [
+  'CLOSED LOST': [
     {
       id: 'task7',
       title: 'Tazkia Foundation Onboard...',
@@ -175,7 +189,7 @@ export default function App() {
   }, [columns, isUpdating]);
 
   // Helper function to find which column contains a specific task ID
-  // Returns the column key (e.g., "Qualification", "Proposal", etc.)
+  // Returns the column key (e.g., "QUALIFICATION", "PROPOSAL", etc.)
   const findContainer = (id) => {
     // If the ID is a column name, return it directly
     if (id in columns) return id;
@@ -377,13 +391,13 @@ export default function App() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6">Sales Pipeline</h1>
+    <main className="min-h-screen p-4">
       {isUpdating && (
-        <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded shadow">
+        <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded shadow z-50">
           Updating database...
         </div>
       )}
+
       {/* DndContext provides the drag-and-drop functionality */}
       <DndContext
         collisionDetection={closestCenter}
@@ -392,7 +406,7 @@ export default function App() {
         onDragEnd={handleDragEnd}
       >
         {/* Grid layout for the columns */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
           {/* Map over each column and create a sortable context for its tasks */}
           {Object.keys(columns).map((key) => (
             <SortableContext
@@ -404,6 +418,7 @@ export default function App() {
             </SortableContext>
           ))}
         </div>
+
         {/* DragOverlay shows a preview of the task being dragged */}
         <DragOverlay>
           {activeId ? <TaskCard task={findTask(activeId)} /> : null}
