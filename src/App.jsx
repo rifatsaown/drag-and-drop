@@ -36,11 +36,11 @@ const sampleData = {
       title: 'Tazkia Foundation Onboard...',
       status: 'COLD',
       daysAgo: 20,
-      client: 'Nasir Uddin',
+      // client: 'Nasir Uddin',
       clientAvatar: null,
       dueDate: '2025-02',
-      industry: 'webdesign',
-      design: 'Design',
+      industry: ['webdesign', 'Design'],
+      design: true,
       priority: 'High',
       team: team,
     },
@@ -55,7 +55,7 @@ const sampleData = {
       client: 'Nasir Uddin',
       clientAvatar: null,
       projectedValue: 50000,
-      probability: 25,
+      probability: 50,
       priority: 'High',
       team: team,
     },
@@ -67,8 +67,8 @@ const sampleData = {
       client: 'Nasir Uddin',
       clientAvatar: null,
       projectedValue: 50000,
-      probability: 25,
-      industry: 'Telehealth',
+      probability: 65,
+      industry: ['Telehealth'],
       priority: 'High',
       team: team,
     },
@@ -96,7 +96,7 @@ const sampleData = {
       clientAvatar: null,
       projectedValue: 50000,
       probability: 25,
-      industry: 'Telehealth',
+      industry: ['Telehealth'],
       priority: 'High',
       team: team,
     },
@@ -109,7 +109,7 @@ const sampleData = {
       clientAvatar: null,
       projectedValue: 50000,
       probability: 25,
-      industry: 'Telehealth',
+      industry: ['Telehealth'],
       priority: 'High',
       team: team,
     },
@@ -391,7 +391,7 @@ export default function App() {
   };
 
   return (
-    <main className="min-h-screen p-4">
+    <main className="min-h-screen p-4 max-w-7xl mx-auto">
       {isUpdating && (
         <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded shadow z-50">
           Updating database...
